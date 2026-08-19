@@ -1,1 +1,941 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BASS GARAGE — Автозвук</title>
 
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#080808;
+    color:#fff;
+}
+
+button,input{
+    font:inherit;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(8,8,8,.94);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #222;
+}
+
+.header-inner{
+    max-width:1100px;
+    margin:auto;
+    padding:15px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#ff3b30;
+}
+
+.cart-btn{
+    border:0;
+    background:#171717;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:14px;
+    cursor:pointer;
+}
+
+.hero{
+    max-width:1100px;
+    margin:auto;
+    padding:45px 18px 30px;
+}
+
+.hero-box{
+    min-height:420px;
+    border-radius:28px;
+    padding:35px 25px;
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    overflow:hidden;
+    background:
+      linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.92)),
+      radial-gradient(circle at 80% 25%,#ff3b30 0,#6d0905 25%,#111 60%);
+    box-shadow:0 20px 60px rgba(255,40,30,.13);
+}
+
+.hero-box:after{
+    content:"BASS";
+    position:absolute;
+    right:-20px;
+    top:30px;
+    font-size:100px;
+    font-weight:900;
+    color:rgba(255,255,255,.06);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 12px;
+    border-radius:30px;
+    background:#ff3b30;
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(38px,9vw,75px);
+    line-height:.92;
+    margin-bottom:18px;
+}
+
+.hero p{
+    color:#ccc;
+    max-width:550px;
+    line-height:1.5;
+}
+
+.primary{
+    margin-top:22px;
+    border:0;
+    background:#ff3b30;
+    color:#fff;
+    padding:15px 22px;
+    border-radius:15px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.section{
+    max-width:1100px;
+    margin:auto;
+    padding:25px 18px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.section-title h2{
+    font-size:25px;
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.category{
+    background:#141414;
+    border:1px solid #242424;
+    padding:20px 15px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-2px);
+    border-color:#ff3b30;
+}
+
+.category-icon{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.category b{
+    display:block;
+    margin-bottom:5px;
+}
+
+.category small{
+    color:#888;
+}
+
+.search{
+    width:100%;
+    background:#151515;
+    border:1px solid #292929;
+    color:white;
+    outline:none;
+    padding:15px 17px;
+    border-radius:16px;
+    margin-bottom:18px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.product{
+    background:#121212;
+    border:1px solid #222;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.product-img{
+    height:175px;
+    background:
+      radial-gradient(circle at 50% 40%,#444,#151515 55%,#090909);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:65px;
+}
+
+.product-info{
+    padding:15px;
+}
+
+.product-category{
+    color:#ff5147;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    margin-bottom:7px;
+}
+
+.product h3{
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.product-description{
+    color:#888;
+    font-size:12px;
+    line-height:1.4;
+    min-height:34px;
+}
+
+.product-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:14px;
+}
+
+.price{
+    font-size:18px;
+    font-weight:900;
+}
+
+.add{
+    border:0;
+    background:#ff3b30;
+    color:white;
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:50px 20px;
+    color:#777;
+}
+
+.footer{
+    text-align:center;
+    color:#666;
+    padding:45px 20px;
+    border-top:1px solid #1d1d1d;
+    margin-top:30px;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:50;
+    display:none;
+    align-items:flex-end;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    background:#111;
+    width:100%;
+    max-width:650px;
+    margin:auto;
+    border-radius:25px 25px 0 0;
+    padding:22px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:#222;
+    color:#fff;
+    width:38px;
+    height:38px;
+    border-radius:12px;
+}
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid #252525;
+}
+
+.cart-icon{
+    width:55px;
+    height:55px;
+    border-radius:14px;
+    background:#1b1b1b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info small{
+    color:#888;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.qty button{
+    border:0;
+    background:#252525;
+    color:#fff;
+    width:28px;
+    height:28px;
+    border-radius:8px;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    font-weight:900;
+    padding:20px 0;
+}
+
+.checkout{
+    width:100%;
+    border:0;
+    background:#ff3b30;
+    color:#fff;
+    padding:16px;
+    border-radius:15px;
+    font-weight:900;
+}
+
+.form{
+    display:none;
+}
+
+.form.active{
+    display:block;
+}
+
+.form input{
+    width:100%;
+    background:#191919;
+    border:1px solid #292929;
+    color:#fff;
+    padding:15px;
+    border-radius:13px;
+    margin-bottom:10px;
+    outline:none;
+}
+
+.order-success{
+    display:none;
+    text-align:center;
+    padding:35px 10px;
+}
+
+.order-success.active{
+    display:block;
+}
+
+.order-success .big{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+@media(min-width:700px){
+    .categories{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .modal{
+        align-items:center;
+    }
+
+    .modal-box{
+        border-radius:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">BASS <span>GARAGE</span></div>
+
+        <button class="cart-btn" onclick="openCart()">
+            🛒 <span id="cartCount">0</span>
+        </button>
+    </div>
+</header>
+
+<main>
+
+<section class="hero">
+    <div class="hero-box">
+        <div class="hero-content">
+            <div class="badge">🔥 АВТОЗВУК</div>
+
+            <h1>БАСС,<br>КОТОРЫЙ<br>ЧУВСТВУЕТСЯ.</h1>
+
+            <p>
+                Сабвуферы, колонки, дверные карты и всё необходимое
+                для мощного автозвука.
+            </p>
+
+            <button class="primary" onclick="scrollToCatalog()">
+                Смотреть товары →
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-title">
+        <h2>Категории</h2>
+    </div>
+
+    <div class="categories">
+
+        <div class="category" onclick="filterProducts('Сабвуферы')">
+            <div class="category-icon">🔊</div>
+            <b>Сабвуферы</b>
+            <small>Мощный бас</small>
+        </div>
+
+        <div class="category" onclick="filterProducts('Колонки')">
+            <div class="category-icon">🎵</div>
+            <b>Колонки</b>
+            <small>Чистый звук</small>
+        </div>
+
+        <div class="category" onclick="filterProducts('Дверные карты')">
+            <div class="category-icon">🚪</div>
+            <b>Дверные карты</b>
+            <small>Для установки</small>
+        </div>
+
+        <div class="category" onclick="filterProducts('Усилители')">
+            <div class="category-icon">⚡</div>
+            <b>Усилители</b>
+            <small>Больше мощности</small>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="catalog">
+
+    <div class="section-title">
+        <h2>🔥 Товары</h2>
+    </div>
+
+    <input
+        class="search"
+        id="search"
+        placeholder="🔎 Найти товар..."
+        oninput="renderProducts()"
+    >
+
+    <div class="products" id="products"></div>
+
+</section>
+
+</main>
+
+<footer class="footer">
+    <b>BASS GARAGE</b>
+    <p>Автозвук с характером 🔊</p>
+</footer>
+
+<!-- CART -->
+
+<div class="modal" id="cartModal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+            <h2>🛒 Корзина</h2>
+            <button class="close" onclick="closeCart()">✕</button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="total">
+            <span>Итого</span>
+            <span id="cartTotal">0 ₽</span>
+        </div>
+
+        <button class="checkout" onclick="showForm()">
+            Оформить заказ
+        </button>
+
+        <div class="form" id="orderForm">
+
+            <h3 style="margin:25px 0 15px">📦 Данные заказа</h3>
+
+            <input id="name" placeholder="Ваше имя">
+
+            <input id="phone" placeholder="Номер телефона">
+
+            <input id="city" placeholder="Город">
+
+            <button class="checkout" onclick="sendOrder()">
+                Отправить заказ
+            </button>
+
+        </div>
+
+        <div class="order-success" id="success">
+            <div class="big">✅</div>
+            <h2>Заказ принят!</h2>
+            <p style="color:#888;margin-top:10px">
+                Мы свяжемся с вами для подтверждения заказа.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const products = [
+
+    {
+        id:1,
+        name:"BassPro 12″ Subwoofer",
+        category:"Сабвуферы",
+        price:12990,
+        icon:"🔊",
+        description:"Мощный 12-дюймовый сабвуфер для глубокого баса."
+    },
+
+    {
+        id:2,
+        name:"BassPro 10″ Subwoofer",
+        category:"Сабвуферы",
+        price:9990,
+        icon:"🔊",
+        description:"Компактный сабвуфер для повседневной системы."
+    },
+
+    {
+        id:3,
+        name:"PRO 165 Component",
+        category:"Колонки",
+        price:7490,
+        icon:"🎵",
+        description:"Компонентная акустика с чистым и громким звучанием."
+    },
+
+    {
+        id:4,
+        name:"Street 200",
+        category:"Колонки",
+        price:5990,
+        icon:"🎵",
+        description:"Громкая акустика для любителей мощного звука."
+    },
+
+    {
+        id:5,
+        name:"Door Sound V1",
+        category:"Дверные карты",
+        price:8990,
+        icon:"🚪",
+        description:"Дверные карты для установки акустики."
+    },
+
+    {
+        id:6,
+        name:"Door Sound V2",
+        category:"Дверные карты",
+        price:10990,
+        icon:"🚪",
+        description:"Расширенные дверные карты под несколько динамиков."
+    },
+
+    {
+        id:7,
+        name:"BassAmp 1500",
+        category:"Усилители",
+        price:11990,
+        icon:"⚡",
+        description:"Мощный усилитель для сабвуфера."
+    },
+
+    {
+        id:8,
+        name:"BassAmp 4CH",
+        category:"Усилители",
+        price:13990,
+        icon:"⚡",
+        description:"4-канальный усилитель для акустики."
+    }
+
+];
+
+let cart = [];
+
+let currentCategory = "Все";
+
+function renderProducts(){
+
+    const container = document.getElementById("products");
+
+    const search =
+        document.getElementById("search").value.toLowerCase();
+
+    let filtered = products.filter(product => {
+
+        const categoryMatch =
+            currentCategory === "Все" ||
+            product.category === currentCategory;
+
+        const searchMatch =
+            product.name.toLowerCase().includes(search) ||
+            product.category.toLowerCase().includes(search);
+
+        return categoryMatch && searchMatch;
+
+    });
+
+    if(filtered.length === 0){
+
+        container.innerHTML =
+            `<div class="empty">😔 Товары не найдены</div>`;
+
+        return;
+    }
+
+    container.innerHTML = filtered.map(product => `
+
+        <div class="product">
+
+            <div class="product-img">
+                ${product.icon}
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    ${product.category}
+                </div>
+
+                <h3>${product.name}</h3>
+
+                <div class="product-description">
+                    ${product.description}
+                </div>
+
+                <div class="product-bottom">
+
+                    <div class="price">
+                        ${formatPrice(product.price)}
+                    </div>
+
+                    <button
+                        class="add"
+                        onclick="addToCart(${product.id})">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+function formatPrice(price){
+
+    return price.toLocaleString("ru-RU") + " ₽";
+
+}
+
+function addToCart(id){
+
+    const existing = cart.find(item => item.id === id);
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        const product = products.find(item => item.id === id);
+
+        cart.push({
+            ...product,
+            quantity:1
+        });
+
+    }
+
+    updateCart();
+
+}
+
+function updateCart(){
+
+    const count =
+        cart.reduce((sum,item) => sum + item.quantity,0);
+
+    document.getElementById("cartCount").textContent = count;
+
+}
+
+function openCart(){
+
+    renderCart();
+
+    document.getElementById("cartModal")
+        .classList.add("active");
+
+}
+
+function closeCart(){
+
+    document.getElementById("cartModal")
+        .classList.remove("active");
+
+}
+
+function renderCart(){
+
+    const container =
+        document.getElementById("cartItems");
+
+    if(cart.length === 0){
+
+        container.innerHTML =
+            `<div class="empty">🛒 Корзина пока пустая</div>`;
+
+        document.getElementById("cartTotal").textContent = "0 ₽";
+
+        return;
+
+    }
+
+    container.innerHTML = cart.map(item => `
+
+        <div class="cart-item">
+
+            <div class="cart-icon">
+                ${item.icon}
+            </div>
+
+            <div class="cart-item-info">
+
+                <b>${item.name}</b>
+
+                <small>
+                    ${formatPrice(item.price)}
+                </small>
+
+            </div>
+
+            <div class="qty">
+
+                <button onclick="changeQty(${item.id},-1)">
+                    −
+                </button>
+
+                <span>${item.quantity}</span>
+
+                <button onclick="changeQty(${item.id},1)">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+    const total =
+        cart.reduce(
+            (sum,item) =>
+            sum + item.price * item.quantity,
+            0
+        );
+
+    document.getElementById("cartTotal")
+        .textContent = formatPrice(total);
+
+}
+
+function changeQty(id,change){
+
+    const item =
+        cart.find(item => item.id === id);
+
+    if(!item) return;
+
+    item.quantity += change;
+
+    if(item.quantity <= 0){
+
+        cart =
+            cart.filter(item => item.id !== id);
+
+    }
+
+    updateCart();
+
+    renderCart();
+
+}
+
+function showForm(){
+
+    if(cart.length === 0){
+
+        alert("Сначала добавьте товар в корзину.");
+
+        return;
+
+    }
+
+    document
+        .getElementById("orderForm")
+        .classList.add("active");
+
+}
+
+function sendOrder(){
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const city =
+        document.getElementById("city").value.trim();
+
+    if(!name || !phone || !city){
+
+        alert("Заполните все поля.");
+
+        return;
+
+    }
+
+    document
+        .getElementById("orderForm")
+        .classList.remove("active");
+
+    document
+        .getElementById("success")
+        .classList.add("active");
+
+    cart = [];
+
+    updateCart();
+
+}
+
+function filterProducts(category){
+
+    currentCategory = category;
+
+    document.getElementById("catalog")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    renderProducts();
+
+}
+
+function scrollToCatalog(){
+
+    document.getElementById("catalog")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
