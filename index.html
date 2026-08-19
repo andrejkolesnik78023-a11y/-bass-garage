@@ -2,428 +2,807 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#090909">
 <title>BASS GARAGE — Автозвук</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+:root{
+ --bg:#080808;
+ --card:#111;
+ --card2:#171717;
+ --line:#242424;
+ --text:#fff;
+ --muted:#909090;
+ --red:#ff3b30;
+ --red2:#ff6259;
+ --green:#35d07f;
 }
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#080808;
-    color:#fff;
+ background:var(--bg);
+ color:var(--text);
+ font-family:Arial,Helvetica,sans-serif;
+ min-height:100vh;
 }
 
-button,input{
-    font:inherit;
+button,input,select{font:inherit}
+
+button{cursor:pointer}
+
+a{text-decoration:none;color:inherit}
+
+.container{
+ width:min(1180px,100%);
+ margin:auto;
+ padding:0 16px;
 }
+
+/* HEADER */
 
 .header{
-    position:sticky;
-    top:0;
-    z-index:20;
-    background:rgba(8,8,8,.94);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid #222;
+ position:sticky;
+ top:0;
+ z-index:100;
+ background:rgba(8,8,8,.92);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--line);
 }
 
-.header-inner{
-    max-width:1100px;
-    margin:auto;
-    padding:15px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.header-main{
+ height:66px;
+ display:flex;
+ align-items:center;
+ gap:12px;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:900;
-    letter-spacing:1px;
+ font-weight:1000;
+ font-size:21px;
+ letter-spacing:-.5px;
+ white-space:nowrap;
 }
 
-.logo span{
-    color:#ff3b30;
+.logo span{color:var(--red)}
+
+.header-search{
+ flex:1;
+ position:relative;
 }
 
-.cart-btn{
-    border:0;
-    background:#171717;
-    color:#fff;
-    padding:10px 14px;
-    border-radius:14px;
-    cursor:pointer;
+.header-search input{
+ width:100%;
+ height:42px;
+ border:1px solid var(--line);
+ background:#151515;
+ border-radius:13px;
+ color:white;
+ padding:0 14px 0 42px;
+ outline:none;
 }
+
+.header-search input:focus{
+ border-color:#555;
+}
+
+.search-icon{
+ position:absolute;
+ left:14px;
+ top:12px;
+ color:#777;
+}
+
+.header-actions{
+ display:flex;
+ gap:7px;
+}
+
+.icon-btn{
+ width:42px;
+ height:42px;
+ border:1px solid var(--line);
+ background:#151515;
+ color:#fff;
+ border-radius:13px;
+ position:relative;
+}
+
+.counter{
+ position:absolute;
+ top:-5px;
+ right:-5px;
+ min-width:18px;
+ height:18px;
+ padding:0 5px;
+ border-radius:20px;
+ background:var(--red);
+ font-size:10px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-weight:800;
+}
+
+/* HERO */
 
 .hero{
-    max-width:1100px;
-    margin:auto;
-    padding:45px 18px 30px;
+ padding:18px 0 12px;
 }
 
 .hero-box{
-    min-height:420px;
-    border-radius:28px;
-    padding:35px 25px;
-    display:flex;
-    align-items:flex-end;
-    position:relative;
-    overflow:hidden;
-    background:
-      linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.92)),
-      radial-gradient(circle at 80% 25%,#ff3b30 0,#6d0905 25%,#111 60%);
-    box-shadow:0 20px 60px rgba(255,40,30,.13);
+ min-height:430px;
+ border-radius:25px;
+ overflow:hidden;
+ position:relative;
+ display:flex;
+ align-items:flex-end;
+ background:
+ radial-gradient(circle at 75% 25%,rgba(255,59,48,.75),transparent 25%),
+ radial-gradient(circle at 85% 70%,rgba(255,59,48,.22),transparent 30%),
+ linear-gradient(135deg,#171717,#080808 70%);
+ border:1px solid #272727;
+}
+
+.hero-box:before{
+ content:"BASS";
+ position:absolute;
+ right:-30px;
+ top:20px;
+ font-size:130px;
+ font-weight:1000;
+ color:rgba(255,255,255,.035);
 }
 
 .hero-box:after{
-    content:"BASS";
-    position:absolute;
-    right:-20px;
-    top:30px;
-    font-size:100px;
-    font-weight:900;
-    color:rgba(255,255,255,.06);
+ content:"";
+ position:absolute;
+ right:5%;
+ top:13%;
+ width:210px;
+ height:210px;
+ border-radius:50%;
+ border:18px solid rgba(255,255,255,.07);
+ box-shadow:
+ 0 0 0 22px rgba(255,255,255,.035),
+ 0 0 0 48px rgba(255,255,255,.02);
 }
 
 .hero-content{
-    position:relative;
-    z-index:2;
+ position:relative;
+ z-index:2;
+ padding:30px 24px;
+ max-width:620px;
 }
 
-.badge{
-    display:inline-block;
-    padding:8px 12px;
-    border-radius:30px;
-    background:#ff3b30;
-    font-size:12px;
-    font-weight:800;
-    margin-bottom:15px;
+.hero-label{
+ display:inline-flex;
+ padding:8px 12px;
+ background:var(--red);
+ border-radius:30px;
+ font-size:11px;
+ font-weight:900;
+ margin-bottom:16px;
 }
 
 .hero h1{
-    font-size:clamp(38px,9vw,75px);
-    line-height:.92;
-    margin-bottom:18px;
+ font-size:clamp(39px,9vw,78px);
+ line-height:.88;
+ letter-spacing:-3px;
+ margin-bottom:18px;
 }
 
 .hero p{
-    color:#ccc;
-    max-width:550px;
-    line-height:1.5;
+ color:#bbb;
+ line-height:1.5;
+ max-width:500px;
 }
 
-.primary{
-    margin-top:22px;
-    border:0;
-    background:#ff3b30;
-    color:#fff;
-    padding:15px 22px;
-    border-radius:15px;
-    font-weight:800;
-    cursor:pointer;
+.hero-buttons{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin-top:22px;
 }
+
+.btn{
+ border:0;
+ border-radius:14px;
+ padding:14px 18px;
+ font-weight:900;
+}
+
+.btn-red{
+ background:var(--red);
+ color:white;
+}
+
+.btn-dark{
+ background:#1c1c1c;
+ color:white;
+ border:1px solid #303030;
+}
+
+/* QUICK */
+
+.quick{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px;
+ padding:15px 0;
+}
+
+.quick-item{
+ background:#111;
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:16px;
+}
+
+.quick-icon{
+ font-size:25px;
+ margin-bottom:9px;
+}
+
+.quick b{
+ font-size:13px;
+ display:block;
+}
+
+.quick small{
+ color:#777;
+ font-size:11px;
+}
+
+/* SECTION */
 
 .section{
-    max-width:1100px;
-    margin:auto;
-    padding:25px 18px;
+ padding:25px 0;
 }
 
-.section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:18px;
+.section-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ margin-bottom:15px;
 }
 
-.section-title h2{
-    font-size:25px;
+.section-head h2{
+ font-size:25px;
+ letter-spacing:-.5px;
 }
+
+.section-head span{
+ color:#777;
+ font-size:12px;
+}
+
+/* CATEGORIES */
 
 .categories{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px;
 }
 
 .category{
-    background:#141414;
-    border:1px solid #242424;
-    padding:20px 15px;
-    border-radius:20px;
-    cursor:pointer;
-    transition:.2s;
+ background:linear-gradient(145deg,#171717,#101010);
+ border:1px solid var(--line);
+ border-radius:18px;
+ padding:17px;
+ min-height:125px;
+ transition:.2s;
 }
 
-.category:hover{
-    transform:translateY(-2px);
-    border-color:#ff3b30;
+.category:active{
+ transform:scale(.98);
 }
 
 .category-icon{
-    font-size:30px;
-    margin-bottom:12px;
+ font-size:30px;
+ margin-bottom:13px;
 }
 
 .category b{
-    display:block;
-    margin-bottom:5px;
+ display:block;
+ margin-bottom:5px;
 }
 
 .category small{
-    color:#888;
+ color:#777;
 }
 
-.search{
-    width:100%;
-    background:#151515;
-    border:1px solid #292929;
-    color:white;
-    outline:none;
-    padding:15px 17px;
-    border-radius:16px;
-    margin-bottom:18px;
+/* CAR */
+
+.car-box{
+ background:
+ linear-gradient(135deg,#181818,#0d0d0d);
+ border:1px solid var(--line);
+ border-radius:22px;
+ padding:20px;
 }
+
+.car-title{
+ font-size:20px;
+ font-weight:900;
+ margin-bottom:6px;
+}
+
+.car-sub{
+ color:#888;
+ font-size:13px;
+ line-height:1.4;
+ margin-bottom:17px;
+}
+
+.car-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:9px;
+}
+
+.field label{
+ color:#777;
+ font-size:10px;
+ display:block;
+ margin:0 0 6px 4px;
+}
+
+.field select{
+ width:100%;
+ height:45px;
+ border:1px solid #292929;
+ background:#161616;
+ color:#fff;
+ border-radius:12px;
+ padding:0 10px;
+ outline:none;
+}
+
+.car-button{
+ margin-top:10px;
+ width:100%;
+}
+
+/* FILTERS */
+
+.filter-bar{
+ display:flex;
+ gap:8px;
+ overflow:auto;
+ padding-bottom:4px;
+ scrollbar-width:none;
+}
+
+.filter-bar::-webkit-scrollbar{display:none}
+
+.filter{
+ white-space:nowrap;
+ border:1px solid #292929;
+ background:#151515;
+ color:#bbb;
+ border-radius:30px;
+ padding:10px 14px;
+ font-size:12px;
+}
+
+.filter.active{
+ background:var(--red);
+ border-color:var(--red);
+ color:#fff;
+}
+
+/* PRODUCTS */
 
 .products{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:11px;
 }
 
 .product{
-    background:#121212;
-    border:1px solid #222;
-    border-radius:20px;
-    overflow:hidden;
+ background:#111;
+ border:1px solid #222;
+ border-radius:19px;
+ overflow:hidden;
+ position:relative;
 }
 
-.product-img{
-    height:175px;
-    background:
-      radial-gradient(circle at 50% 40%,#444,#151515 55%,#090909);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:65px;
+.product-photo{
+ height:175px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ position:relative;
+ background:
+ radial-gradient(circle at 50% 42%,#404040,#181818 46%,#0d0d0d);
+}
+
+.product-photo .speaker{
+ width:105px;
+ height:105px;
+ border-radius:50%;
+ background:
+ radial-gradient(circle,#050505 0 17%,#444 18% 28%,#151515 29% 48%,#333 49% 53%,#111 54%);
+ box-shadow:0 8px 30px rgba(0,0,0,.7);
+}
+
+.product-fav{
+ position:absolute;
+ top:9px;
+ right:9px;
+ width:35px;
+ height:35px;
+ border:1px solid #333;
+ border-radius:11px;
+ background:rgba(10,10,10,.75);
+ color:#fff;
+}
+
+.product-fav.active{
+ color:var(--red);
+}
+
+.product-badge{
+ position:absolute;
+ left:9px;
+ top:9px;
+ background:var(--red);
+ border-radius:8px;
+ padding:5px 7px;
+ font-size:9px;
+ font-weight:900;
 }
 
 .product-info{
-    padding:15px;
+ padding:13px;
 }
 
-.product-category{
-    color:#ff5147;
-    font-size:11px;
-    font-weight:800;
-    text-transform:uppercase;
-    margin-bottom:7px;
+.product-brand{
+ color:var(--red2);
+ font-size:9px;
+ text-transform:uppercase;
+ font-weight:900;
+ margin-bottom:6px;
 }
 
 .product h3{
-    font-size:16px;
-    margin-bottom:8px;
+ font-size:14px;
+ line-height:1.25;
+ min-height:36px;
 }
 
-.product-description{
-    color:#888;
-    font-size:12px;
-    line-height:1.4;
-    min-height:34px;
+.specs{
+ display:flex;
+ gap:5px;
+ flex-wrap:wrap;
+ margin-top:9px;
+}
+
+.spec{
+ background:#191919;
+ color:#888;
+ padding:5px 6px;
+ border-radius:6px;
+ font-size:9px;
 }
 
 .product-bottom{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-top:14px;
+ margin-top:13px;
+ display:flex;
+ align-items:end;
+ justify-content:space-between;
+ gap:5px;
 }
 
 .price{
-    font-size:18px;
-    font-weight:900;
+ font-weight:1000;
+ font-size:17px;
 }
 
-.add{
-    border:0;
-    background:#ff3b30;
-    color:white;
-    width:38px;
-    height:38px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:20px;
+.old-price{
+ display:block;
+ color:#666;
+ font-size:10px;
+ text-decoration:line-through;
+ margin-bottom:2px;
 }
 
-.empty{
-    grid-column:1/-1;
-    text-align:center;
-    padding:50px 20px;
-    color:#777;
+.add-btn{
+ width:39px;
+ height:39px;
+ border:0;
+ border-radius:12px;
+ background:var(--red);
+ color:#fff;
+ font-size:20px;
+ font-weight:900;
 }
+
+/* BENEFITS */
+
+.benefits{
+ display:grid;
+ gap:10px;
+}
+
+.benefit{
+ display:flex;
+ gap:14px;
+ align-items:center;
+ background:#111;
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:15px;
+}
+
+.benefit-icon{
+ width:45px;
+ height:45px;
+ border-radius:13px;
+ background:#1a1a1a;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:21px;
+ flex:none;
+}
+
+.benefit b{
+ display:block;
+ font-size:13px;
+ margin-bottom:4px;
+}
+
+.benefit small{
+ color:#777;
+ line-height:1.3;
+}
+
+/* FOOTER */
 
 .footer{
-    text-align:center;
-    color:#666;
-    padding:45px 20px;
-    border-top:1px solid #1d1d1d;
-    margin-top:30px;
+ margin-top:30px;
+ padding:35px 0 80px;
+ border-top:1px solid var(--line);
+ color:#777;
+ text-align:center;
+}
+
+.footer-logo{
+ color:#fff;
+ font-size:20px;
+ font-weight:1000;
+ margin-bottom:8px;
+}
+
+.footer-logo span{color:var(--red)}
+
+/* MOBILE NAV */
+
+.bottom-nav{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ z-index:90;
+ height:64px;
+ background:rgba(12,12,12,.95);
+ backdrop-filter:blur(15px);
+ border-top:1px solid #252525;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+}
+
+.nav-item{
+ border:0;
+ background:none;
+ color:#777;
+ font-size:10px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ gap:4px;
+}
+
+.nav-item.active{
+ color:white;
+}
+
+.nav-item .nav-icon{
+ font-size:19px;
+}
+
+/* MODAL */
+
+.overlay{
+ position:fixed;
+ inset:0;
+ z-index:200;
+ background:rgba(0,0,0,.78);
+ display:none;
+ align-items:flex-end;
+}
+
+.overlay.show{
+ display:flex;
 }
 
 .modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.75);
-    z-index:50;
-    display:none;
-    align-items:flex-end;
-}
-
-.modal.active{
-    display:flex;
-}
-
-.modal-box{
-    background:#111;
-    width:100%;
-    max-width:650px;
-    margin:auto;
-    border-radius:25px 25px 0 0;
-    padding:22px;
-    max-height:90vh;
-    overflow:auto;
+ width:100%;
+ max-height:92vh;
+ overflow:auto;
+ background:#101010;
+ border-radius:25px 25px 0 0;
+ border-top:1px solid #303030;
+ padding:20px;
 }
 
 .modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ margin-bottom:20px;
 }
 
 .close{
-    border:0;
-    background:#222;
-    color:#fff;
-    width:38px;
-    height:38px;
-    border-radius:12px;
+ width:38px;
+ height:38px;
+ border:0;
+ border-radius:12px;
+ background:#222;
+ color:#fff;
+}
+
+.cart-list{
+ display:grid;
+ gap:9px;
 }
 
 .cart-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px 0;
-    border-bottom:1px solid #252525;
+ display:flex;
+ align-items:center;
+ gap:11px;
+ background:#181818;
+ border-radius:15px;
+ padding:10px;
 }
 
-.cart-icon{
-    width:55px;
-    height:55px;
-    border-radius:14px;
-    background:#1b1b1b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:25px;
+.cart-thumb{
+ width:58px;
+ height:58px;
+ border-radius:12px;
+ background:#0d0d0d;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex:none;
 }
 
-.cart-item-info{
-    flex:1;
+.cart-info{
+ flex:1;
 }
 
-.cart-item-info small{
-    color:#888;
+.cart-info b{
+ display:block;
+ font-size:12px;
+ margin-bottom:4px;
+}
+
+.cart-info small{
+ color:#777;
 }
 
 .qty{
-    display:flex;
-    align-items:center;
-    gap:8px;
+ display:flex;
+ align-items:center;
+ gap:6px;
 }
 
 .qty button{
-    border:0;
-    background:#252525;
-    color:#fff;
-    width:28px;
-    height:28px;
-    border-radius:8px;
+ width:27px;
+ height:27px;
+ border:0;
+ border-radius:8px;
+ background:#292929;
+ color:#fff;
 }
 
-.total{
-    display:flex;
-    justify-content:space-between;
-    font-size:20px;
-    font-weight:900;
-    padding:20px 0;
+.cart-total{
+ display:flex;
+ justify-content:space-between;
+ padding:20px 0;
+ font-size:20px;
+ font-weight:1000;
 }
 
-.checkout{
-    width:100%;
-    border:0;
-    background:#ff3b30;
-    color:#fff;
-    padding:16px;
-    border-radius:15px;
-    font-weight:900;
+.full-btn{
+ width:100%;
 }
 
 .form{
-    display:none;
-}
-
-.form.active{
-    display:block;
+ display:grid;
+ gap:9px;
 }
 
 .form input{
-    width:100%;
-    background:#191919;
-    border:1px solid #292929;
-    color:#fff;
-    padding:15px;
-    border-radius:13px;
-    margin-bottom:10px;
-    outline:none;
+ width:100%;
+ height:48px;
+ border:1px solid #292929;
+ background:#181818;
+ border-radius:13px;
+ color:#fff;
+ padding:0 13px;
+ outline:none;
 }
 
-.order-success{
-    display:none;
-    text-align:center;
-    padding:35px 10px;
+.success{
+ display:none;
+ text-align:center;
+ padding:30px 10px;
 }
 
-.order-success.active{
-    display:block;
+.success.show{display:block}
+
+.success-icon{
+ font-size:55px;
+ margin-bottom:12px;
 }
 
-.order-success .big{
-    font-size:55px;
-    margin-bottom:15px;
-}
+/* DESKTOP */
 
 @media(min-width:700px){
-    .categories{
-        grid-template-columns:repeat(4,1fr);
-    }
 
-    .products{
-        grid-template-columns:repeat(3,1fr);
-    }
+ .container{padding:0 24px}
 
-    .modal{
-        align-items:center;
-    }
+ .quick{
+  grid-template-columns:repeat(4,1fr);
+ }
 
-    .modal-box{
-        border-radius:25px;
-    }
+ .categories{
+  grid-template-columns:repeat(4,1fr);
+ }
+
+ .products{
+  grid-template-columns:repeat(3,1fr);
+ }
+
+ .benefits{
+  grid-template-columns:repeat(3,1fr);
+ }
+
+ .bottom-nav{display:none}
+
+ .overlay{
+  align-items:center;
+ }
+
+ .modal{
+  width:min(620px,94%);
+  border-radius:25px;
+ }
+
+}
+
+@media(min-width:1000px){
+
+ .products{
+  grid-template-columns:repeat(4,1fr);
+ }
+
+ .hero-content{
+  padding:50px;
+ }
+
+ .hero-box{
+  min-height:500px;
+ }
+
 }
 </style>
 </head>
@@ -431,509 +810,1322 @@ button,input{
 <body>
 
 <header class="header">
-    <div class="header-inner">
-        <div class="logo">BASS <span>GARAGE</span></div>
 
-        <button class="cart-btn" onclick="openCart()">
-            🛒 <span id="cartCount">0</span>
-        </button>
-    </div>
+ <div class="container header-main">
+
+  <div class="logo">
+   BASS <span>GARAGE</span>
+  </div>
+
+  <div class="header-search">
+   <span class="search-icon">⌕</span>
+   <input
+    id="search"
+    type="text"
+    placeholder="Найти автозвук..."
+    oninput="renderProducts()"
+   >
+  </div>
+
+  <div class="header-actions">
+
+   <button
+    class="icon-btn"
+    onclick="openModal('favoritesModal')">
+    ♡
+    <span class="counter" id="favCount">0</span>
+   </button>
+
+   <button
+    class="icon-btn"
+    onclick="openCart()">
+    🛒
+    <span class="counter" id="cartCount">0</span>
+   </button>
+
+  </div>
+
+ </div>
+
 </header>
+
 
 <main>
 
 <section class="hero">
-    <div class="hero-box">
-        <div class="hero-content">
-            <div class="badge">🔥 АВТОЗВУК</div>
 
-            <h1>БАСС,<br>КОТОРЫЙ<br>ЧУВСТВУЕТСЯ.</h1>
+ <div class="container">
 
-            <p>
-                Сабвуферы, колонки, дверные карты и всё необходимое
-                для мощного автозвука.
-            </p>
+  <div class="hero-box">
 
-            <button class="primary" onclick="scrollToCatalog()">
-                Смотреть товары →
-            </button>
-        </div>
+   <div class="hero-content">
+
+    <div class="hero-label">
+     🔥 АВТОЗВУК
     </div>
+
+    <h1>
+     БАС,<br>
+     КОТОРЫЙ<br>
+     ЧУВСТВУЕТСЯ.
+    </h1>
+
+    <p>
+     Сабвуферы, акустика, усилители и комплектующие
+     для создания мощной системы в твоём автомобиле.
+    </p>
+
+    <div class="hero-buttons">
+
+     <button
+      class="btn btn-red"
+      onclick="scrollToCatalog()">
+      Смотреть каталог →
+     </button>
+
+     <button
+      class="btn btn-dark"
+      onclick="scrollToCar()">
+      🚗 Подобрать под авто
+     </button>
+
+    </div>
+
+   </div>
+
+  </div>
+
+ </div>
+
 </section>
+
+
+<section class="container">
+
+ <div class="quick">
+
+  <div class="quick-item">
+   <div class="quick-icon">🚚</div>
+   <b>Быстрая доставка</b>
+   <small>Отправка по России</small>
+  </div>
+
+  <div class="quick-item">
+   <div class="quick-icon">🛡️</div>
+   <b>Гарантия</b>
+   <small>Проверенные товары</small>
+  </div>
+
+  <div class="quick-item">
+   <div class="quick-icon">💬</div>
+   <b>Помощь в выборе</b>
+   <small>Подберём систему</small>
+  </div>
+
+  <div class="quick-item">
+   <div class="quick-icon">⚡</div>
+   <b>Мощный звук</b>
+   <small>Для любых задач</small>
+  </div>
+
+ </div>
+
+</section>
+
 
 <section class="section">
-    <div class="section-title">
-        <h2>Категории</h2>
-    </div>
 
-    <div class="categories">
+ <div class="container">
 
-        <div class="category" onclick="filterProducts('Сабвуферы')">
-            <div class="category-icon">🔊</div>
-            <b>Сабвуферы</b>
-            <small>Мощный бас</small>
-        </div>
+  <div class="section-head">
+   <h2>Категории</h2>
+   <span>Смотреть всё →</span>
+  </div>
 
-        <div class="category" onclick="filterProducts('Колонки')">
-            <div class="category-icon">🎵</div>
-            <b>Колонки</b>
-            <small>Чистый звук</small>
-        </div>
+  <div class="categories">
 
-        <div class="category" onclick="filterProducts('Дверные карты')">
-            <div class="category-icon">🚪</div>
-            <b>Дверные карты</b>
-            <small>Для установки</small>
-        </div>
+   <div
+    class="category"
+    onclick="setCategory('Сабвуферы')">
 
-        <div class="category" onclick="filterProducts('Усилители')">
-            <div class="category-icon">⚡</div>
-            <b>Усилители</b>
-            <small>Больше мощности</small>
-        </div>
+    <div class="category-icon">🔊</div>
+    <b>Сабвуферы</b>
+    <small>Глубокий и мощный бас</small>
 
-    </div>
+   </div>
+
+   <div
+    class="category"
+    onclick="setCategory('Динамики')">
+
+    <div class="category-icon">🎵</div>
+    <b>Динамики</b>
+    <small>Эстрадные и компонентные</small>
+
+   </div>
+
+   <div
+    class="category"
+    onclick="setCategory('Дверные карты')">
+
+    <div class="category-icon">🚪</div>
+    <b>Дверные карты</b>
+    <small>Под несколько динамиков</small>
+
+   </div>
+
+   <div
+    class="category"
+    onclick="setCategory('Усилители')">
+
+    <div class="category-icon">⚡</div>
+    <b>Усилители</b>
+    <small>Больше мощности</small>
+
+   </div>
+
+   <div
+    class="category"
+    onclick="setCategory('Короба')">
+
+    <div class="category-icon">📦</div>
+    <b>Короба</b>
+    <small>ФИ, ЗЯ и стелс</small>
+
+   </div>
+
+   <div
+    class="category"
+    onclick="setCategory('Аксессуары')">
+
+    <div class="category-icon">🔌</div>
+    <b>Аксессуары</b>
+    <small>Провода и установка</small>
+
+   </div>
+
+  </div>
+
+ </div>
+
 </section>
 
-<section class="section" id="catalog">
 
-    <div class="section-title">
-        <h2>🔥 Товары</h2>
+<section
+ class="section"
+ id="carSection">
+
+ <div class="container">
+
+  <div class="car-box">
+
+   <div class="car-title">
+    🚗 Подбор автозвука
+   </div>
+
+   <div class="car-sub">
+    Выбери автомобиль — покажем оборудование,
+    которое подходит для твоей машины.
+   </div>
+
+   <div class="car-grid">
+
+    <div class="field">
+
+     <label>МАРКА</label>
+
+     <select id="carBrand">
+      <option value="">Выберите марку</option>
+      <option>LADA</option>
+      <option>BMW</option>
+      <option>Mercedes-Benz</option>
+      <option>Volkswagen</option>
+      <option>Toyota</option>
+      <option>Kia</option>
+      <option>Hyundai</option>
+      <option>Ford</option>
+      <option>Chevrolet</option>
+     </select>
+
     </div>
 
-    <input
-        class="search"
-        id="search"
-        placeholder="🔎 Найти товар..."
-        oninput="renderProducts()"
-    >
+    <div class="field">
 
-    <div class="products" id="products"></div>
+     <label>МОДЕЛЬ</label>
+
+     <select id="carModel">
+
+      <option value="">
+       Сначала марка
+      </option>
+
+     </select>
+
+    </div>
+
+   </div>
+
+   <button
+    class="btn btn-red car-button"
+    onclick="findForCar()">
+    Подобрать оборудование
+   </button>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<section
+ class="section"
+ id="catalogSection">
+
+ <div class="container">
+
+  <div class="section-head">
+
+   <h2>🔥 Каталог</h2>
+
+   <span id="productCount">
+    0 товаров
+   </span>
+
+  </div>
+
+
+  <div class="filter-bar">
+
+   <button
+    class="filter active"
+    data-category="Все"
+    onclick="setCategory('Все')">
+    Все
+   </button>
+
+   <button
+    class="filter"
+    data-category="Сабвуферы"
+    onclick="setCategory('Сабвуферы')">
+    🔊 Сабвуферы
+   </button>
+
+   <button
+    class="filter"
+    data-category="Динамики"
+    onclick="setCategory('Динамики')">
+    🎵 Динамики
+   </button>
+
+   <button
+    class="filter"
+    data-category="Дверные карты"
+    onclick="setCategory('Дверные карты')">
+    🚪 Дверные карты
+   </button>
+
+   <button
+    class="filter"
+    data-category="Усилители"
+    onclick="setCategory('Усилители')">
+    ⚡ Усилители
+   </button>
+
+   <button
+    class="filter"
+    data-category="Короба"
+    onclick="setCategory('Короба')">
+    📦 Короба
+   </button>
+
+   <button
+    class="filter"
+    data-category="Аксессуары"
+    onclick="setCategory('Аксессуары')">
+    🔌 Аксессуары
+   </button>
+
+  </div>
+
+  <div
+   class="products"
+   id="products"
+   style="margin-top:15px">
+  </div>
+
+ </div>
+
+</section>
+
+
+<section class="section">
+
+ <div class="container">
+
+  <div class="section-head">
+   <h2>Почему BASS GARAGE?</h2>
+  </div>
+
+  <div class="benefits">
+
+   <div class="benefit">
+
+    <div class="benefit-icon">🔊</div>
+
+    <div>
+     <b>Подберём систему</b>
+     <small>
+      Поможем подобрать компоненты,
+      которые будут нормально работать вместе.
+     </small>
+    </div>
+
+   </div>
+
+   <div class="benefit">
+
+    <div class="benefit-icon">📦</div>
+
+    <div>
+     <b>Отправка по России</b>
+     <small>
+      Упакуем оборудование и отправим
+      удобной транспортной компанией.
+     </small>
+    </div>
+
+   </div>
+
+   <div class="benefit">
+
+    <div class="benefit-icon">💬</div>
+
+    <div>
+     <b>Консультация</b>
+     <small>
+      Если не разбираешься в автозвуке —
+      поможем собрать комплект.
+     </small>
+    </div>
+
+   </div>
+
+  </div>
+
+ </div>
 
 </section>
 
 </main>
 
+
 <footer class="footer">
-    <b>BASS GARAGE</b>
-    <p>Автозвук с характером 🔊</p>
+
+ <div class="container">
+
+  <div class="footer-logo">
+   BASS <span>GARAGE</span>
+  </div>
+
+  <p>
+   Автозвук, который чувствуется 🔊
+  </p>
+
+  <p style="margin-top:12px;font-size:11px">
+   © 2026 BASS GARAGE
+  </p>
+
+ </div>
+
 </footer>
 
-<!-- CART -->
 
-<div class="modal" id="cartModal">
+<!-- BOTTOM NAV -->
 
-    <div class="modal-box">
+<nav class="bottom-nav">
 
-        <div class="modal-head">
-            <h2>🛒 Корзина</h2>
-            <button class="close" onclick="closeCart()">✕</button>
-        </div>
+ <button
+  class="nav-item active"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})">
 
-        <div id="cartItems"></div>
+  <span class="nav-icon">⌂</span>
+  Главная
 
-        <div class="total">
-            <span>Итого</span>
-            <span id="cartTotal">0 ₽</span>
-        </div>
+ </button>
 
-        <button class="checkout" onclick="showForm()">
-            Оформить заказ
-        </button>
+ <button
+  class="nav-item"
+  onclick="scrollToCatalog()">
 
-        <div class="form" id="orderForm">
+  <span class="nav-icon">▦</span>
+  Каталог
 
-            <h3 style="margin:25px 0 15px">📦 Данные заказа</h3>
+ </button>
 
-            <input id="name" placeholder="Ваше имя">
+ <button
+  class="nav-item"
+  onclick="openModal('favoritesModal')">
 
-            <input id="phone" placeholder="Номер телефона">
+  <span class="nav-icon">♡</span>
+  Избранное
 
-            <input id="city" placeholder="Город">
+ </button>
 
-            <button class="checkout" onclick="sendOrder()">
-                Отправить заказ
-            </button>
+ <button
+  class="nav-item"
+  onclick="openCart()">
 
-        </div>
+  <span class="nav-icon">🛒</span>
+  Корзина
 
-        <div class="order-success" id="success">
-            <div class="big">✅</div>
-            <h2>Заказ принят!</h2>
-            <p style="color:#888;margin-top:10px">
-                Мы свяжемся с вами для подтверждения заказа.
-            </p>
-        </div>
+ </button>
 
-    </div>
+</nav>
+
+
+<!-- CART MODAL -->
+
+<div
+ class="overlay"
+ id="cartModal"
+ onclick="closeByOverlay(event,'cartModal')">
+
+ <div class="modal">
+
+  <div class="modal-head">
+
+   <h2>🛒 Корзина</h2>
+
+   <button
+    class="close"
+    onclick="closeModal('cartModal')">
+    ✕
+   </button>
+
+  </div>
+
+  <div
+   class="cart-list"
+   id="cartList">
+  </div>
+
+  <div
+   class="cart-total">
+
+   <span>Итого</span>
+
+   <span id="cartTotal">
+    0 ₽
+   </span>
+
+  </div>
+
+  <div id="checkoutArea">
+
+   <div class="form">
+
+    <input
+     id="orderName"
+     placeholder="Ваше имя">
+
+    <input
+     id="orderPhone"
+     placeholder="Номер телефона">
+
+    <input
+     id="orderCity"
+     placeholder="Город">
+
+    <input
+     id="orderComment"
+     placeholder="Комментарий к заказу">
+
+    <button
+     class="btn btn-red full-btn"
+     onclick="createOrder()">
+     Оформить заказ
+    </button>
+
+   </div>
+
+  </div>
+
+  <div
+   class="success"
+   id="orderSuccess">
+
+   <div class="success-icon">
+    ✅
+   </div>
+
+   <h2>Заказ оформлен!</h2>
+
+   <p
+    style="color:#777;margin-top:10px">
+    Мы свяжемся с вами для подтверждения заказа.
+   </p>
+
+  </div>
+
+ </div>
 
 </div>
 
+
+<!-- FAVORITES -->
+
+<div
+ class="overlay"
+ id="favoritesModal"
+ onclick="closeByOverlay(event,'favoritesModal')">
+
+ <div class="modal">
+
+  <div class="modal-head">
+
+   <h2>♡ Избранное</h2>
+
+   <button
+    class="close"
+    onclick="closeModal('favoritesModal')">
+    ✕
+   </button>
+
+  </div>
+
+  <div
+   class="products"
+   id="favoritesList">
+  </div>
+
+ </div>
+
+</div>
+
+
 <script>
 
-const products = [
+const products=[
 
-    {
-        id:1,
-        name:"BassPro 12″ Subwoofer",
-        category:"Сабвуферы",
-        price:12990,
-        icon:"🔊",
-        description:"Мощный 12-дюймовый сабвуфер для глубокого баса."
-    },
+ {
+  id:1,
+  name:"BassPower 12 D2",
+  category:"Сабвуферы",
+  brand:"BASS POWER",
+  price:14990,
+  oldPrice:16990,
+  specs:["12″","1200W RMS","2+2 Ω"]
+ },
 
-    {
-        id:2,
-        name:"BassPro 10″ Subwoofer",
-        category:"Сабвуферы",
-        price:9990,
-        icon:"🔊",
-        description:"Компактный сабвуфер для повседневной системы."
-    },
+ {
+  id:2,
+  name:"Street Bass 10",
+  category:"Сабвуферы",
+  brand:"STREET",
+  price:9990,
+  oldPrice:11990,
+  specs:["10″","800W RMS","2 Ω"]
+ },
 
-    {
-        id:3,
-        name:"PRO 165 Component",
-        category:"Колонки",
-        price:7490,
-        icon:"🎵",
-        description:"Компонентная акустика с чистым и громким звучанием."
-    },
+ {
+  id:3,
+  name:"PRO 165 Component",
+  category:"Динамики",
+  brand:"BASS GARAGE",
+  price:7490,
+  oldPrice:8490,
+  specs:["16.5 см","120W RMS","4 Ω"]
+ },
 
-    {
-        id:4,
-        name:"Street 200",
-        category:"Колонки",
-        price:5990,
-        icon:"🎵",
-        description:"Громкая акустика для любителей мощного звука."
-    },
+ {
+  id:4,
+  name:"Street Midbass 200",
+  category:"Динамики",
+  brand:"STREET",
+  price:5990,
+  oldPrice:6990,
+  specs:["20 см","150W RMS","4 Ω"]
+ },
 
-    {
-        id:5,
-        name:"Door Sound V1",
-        category:"Дверные карты",
-        price:8990,
-        icon:"🚪",
-        description:"Дверные карты для установки акустики."
-    },
+ {
+  id:5,
+  name:"Garage Door V1",
+  category:"Дверные карты",
+  brand:"BASS GARAGE",
+  price:8990,
+  oldPrice:9990,
+  specs:["2 динамика","MDF","LADA"]
+ },
 
-    {
-        id:6,
-        name:"Door Sound V2",
-        category:"Дверные карты",
-        price:10990,
-        icon:"🚪",
-        description:"Расширенные дверные карты под несколько динамиков."
-    },
+ {
+  id:6,
+  name:"Garage Door V2",
+  category:"Дверные карты",
+  brand:"BASS GARAGE",
+  price:11990,
+  oldPrice:13990,
+  specs:["4 динамика","MDF","LADA"]
+ },
 
-    {
-        id:7,
-        name:"BassAmp 1500",
-        category:"Усилители",
-        price:11990,
-        icon:"⚡",
-        description:"Мощный усилитель для сабвуфера."
-    },
+ {
+  id:7,
+  name:"BassAmp 1500.1",
+  category:"Усилители",
+  brand:"BASS AMP",
+  price:12990,
+  oldPrice:14990,
+  specs:["MONO","1500W","1 Ω"]
+ },
 
-    {
-        id:8,
-        name:"BassAmp 4CH",
-        category:"Усилители",
-        price:13990,
-        icon:"⚡",
-        description:"4-канальный усилитель для акустики."
-    }
+ {
+  id:8,
+  name:"BassAmp 4CH",
+  category:"Усилители",
+  brand:"BASS AMP",
+  price:10990,
+  oldPrice:12990,
+  specs:["4 CH","1200W","4 Ω"]
+ },
+
+ {
+  id:9,
+  name:"BassBox 12",
+  category:"Короба",
+  brand:"BASS GARAGE",
+  price:6990,
+  oldPrice:7990,
+  specs:["12″","ФИ","MDF"]
+ },
+
+ {
+  id:10,
+  name:"Stels Box LADA",
+  category:"Короба",
+  brand:"BASS GARAGE",
+  price:7990,
+  oldPrice:8990,
+  specs:["Стелс","LADA","MDF"]
+ },
+
+ {
+  id:11,
+  name:"Power Kit 4GA",
+  category:"Аксессуары",
+  brand:"BASS POWER",
+  price:4990,
+  oldPrice:5990,
+  specs:["4GA","OFC","5 м"]
+ },
+
+ {
+  id:12,
+  name:"RCA PRO 5M",
+  category:"Аксессуары",
+  brand:"BASS GARAGE",
+  price:1990,
+  oldPrice:2490,
+  specs:["RCA","5 м","2 канала"]
+ }
 
 ];
 
-let cart = [];
 
-let currentCategory = "Все";
+let category="Все";
+
+let cart=[];
+
+let favorites=[];
+
+
+const models={
+ "LADA":[
+  "ВАЗ 2110",
+  "ВАЗ 2114",
+  "ВАЗ 2115",
+  "Granta",
+  "Vesta",
+  "Priora",
+  "Niva"
+ ],
+ "BMW":[
+  "3 Series",
+  "5 Series",
+  "X3",
+  "X5"
+ ],
+ "Mercedes-Benz":[
+  "C-Class",
+  "E-Class",
+  "GLC"
+ ],
+ "Volkswagen":[
+  "Polo",
+  "Golf",
+  "Passat"
+ ],
+ "Toyota":[
+  "Camry",
+  "Corolla",
+  "RAV4"
+ ],
+ "Kia":[
+  "Rio",
+  "Ceed",
+  "Sportage"
+ ],
+ "Hyundai":[
+  "Solaris",
+  "Elantra",
+  "Tucson"
+ ],
+ "Ford":[
+  "Focus",
+  "Mondeo",
+  "Kuga"
+ ],
+ "Chevrolet":[
+  "Niva",
+  "Cruze",
+  "Lacetti"
+ ]
+};
+
+
+function money(value){
+
+ return value.toLocaleString("ru-RU")+" ₽";
+
+}
+
 
 function renderProducts(){
 
-    const container = document.getElementById("products");
+ const container=
+ document.getElementById("products");
 
-    const search =
-        document.getElementById("search").value.toLowerCase();
+ const search=
+ document.getElementById("search").value
+ .toLowerCase()
+ .trim();
 
-    let filtered = products.filter(product => {
+ const filtered=
+ products.filter(p=>{
 
-        const categoryMatch =
-            currentCategory === "Все" ||
-            product.category === currentCategory;
+  const categoryOk=
+   category==="Все"||
+   p.category===category;
 
-        const searchMatch =
-            product.name.toLowerCase().includes(search) ||
-            product.category.toLowerCase().includes(search);
+  const searchOk=
+   !search||
+   p.name.toLowerCase().includes(search)||
+   p.brand.toLowerCase().includes(search)||
+   p.category.toLowerCase().includes(search)||
+   p.specs.join(" ").toLowerCase().includes(search);
 
-        return categoryMatch && searchMatch;
+  return categoryOk&&searchOk;
 
-    });
+ });
 
-    if(filtered.length === 0){
 
-        container.innerHTML =
-            `<div class="empty">😔 Товары не найдены</div>`;
+ document.getElementById("productCount")
+ .textContent=
+ filtered.length+" товаров";
 
-        return;
-    }
 
-    container.innerHTML = filtered.map(product => `
+ if(!filtered.length){
 
-        <div class="product">
+  container.innerHTML=
+  `<div style="grid-column:1/-1;text-align:center;padding:50px;color:#777">
+   😔 По вашему запросу ничего не найдено
+  </div>`;
 
-            <div class="product-img">
-                ${product.icon}
-            </div>
+  return;
 
-            <div class="product-info">
+ }
 
-                <div class="product-category">
-                    ${product.category}
-                </div>
 
-                <h3>${product.name}</h3>
-
-                <div class="product-description">
-                    ${product.description}
-                </div>
-
-                <div class="product-bottom">
-
-                    <div class="price">
-                        ${formatPrice(product.price)}
-                    </div>
-
-                    <button
-                        class="add"
-                        onclick="addToCart(${product.id})">
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `).join("");
+ container.innerHTML=
+ filtered.map(productCard).join("");
 
 }
 
-function formatPrice(price){
 
-    return price.toLocaleString("ru-RU") + " ₽";
+function productCard(p){
+
+ const liked=
+ favorites.includes(p.id);
+
+ return`
+
+ <article class="product">
+
+  <div class="product-photo">
+
+   ${p.id%3===0
+    ? '<div class="speaker"></div>'
+    : '<div class="speaker"></div>'}
+
+   <div class="product-badge">
+    ХИТ
+   </div>
+
+   <button
+    class="product-fav ${liked?'active':''}"
+    onclick="toggleFavorite(${p.id})">
+
+    ${liked?'♥':'♡'}
+
+   </button>
+
+  </div>
+
+  <div class="product-info">
+
+   <div class="product-brand">
+    ${p.brand}
+   </div>
+
+   <h3>
+    ${p.name}
+   </h3>
+
+   <div class="specs">
+
+    ${p.specs.map(s=>
+     `<span class="spec">${s}</span>`
+    ).join("")}
+
+   </div>
+
+   <div class="product-bottom">
+
+    <div>
+
+     <span class="old-price">
+      ${money(p.oldPrice)}
+     </span>
+
+     <div class="price">
+      ${money(p.price)}
+     </div>
+
+    </div>
+
+    <button
+     class="add-btn"
+     onclick="addToCart(${p.id})">
+     +
+    </button>
+
+   </div>
+
+  </div>
+
+ </article>
+
+ `;
 
 }
+
+
+function setCategory(value){
+
+ category=value;
+
+ document
+ .querySelectorAll(".filter")
+ .forEach(button=>{
+
+  button.classList.toggle(
+   "active",
+   button.dataset.category===value
+  );
+
+ });
+
+ renderProducts();
+
+ document
+ .getElementById("catalogSection")
+ .scrollIntoView({
+  behavior:"smooth",
+  block:"start"
+ });
+
+}
+
 
 function addToCart(id){
 
-    const existing = cart.find(item => item.id === id);
+ const product=
+ products.find(p=>p.id===id);
 
-    if(existing){
+ const existing=
+ cart.find(p=>p.id===id);
 
-        existing.quantity++;
+ if(existing){
 
-    }else{
+  existing.qty++;
 
-        const product = products.find(item => item.id === id);
+ }else{
 
-        cart.push({
-            ...product,
-            quantity:1
-        });
+  cart.push({
+   ...product,
+   qty:1
+  });
 
-    }
+ }
 
-    updateCart();
+ updateCart();
 
 }
+
 
 function updateCart(){
 
-    const count =
-        cart.reduce((sum,item) => sum + item.quantity,0);
+ const count=
+ cart.reduce(
+  (sum,p)=>sum+p.qty,
+  0
+ );
 
-    document.getElementById("cartCount").textContent = count;
+ document.getElementById("cartCount")
+ .textContent=count;
 
-}
-
-function openCart(){
-
-    renderCart();
-
-    document.getElementById("cartModal")
-        .classList.add("active");
+ renderCart();
 
 }
 
-function closeCart(){
-
-    document.getElementById("cartModal")
-        .classList.remove("active");
-
-}
 
 function renderCart(){
 
-    const container =
-        document.getElementById("cartItems");
+ const list=
+ document.getElementById("cartList");
 
-    if(cart.length === 0){
+ if(!cart.length){
 
-        container.innerHTML =
-            `<div class="empty">🛒 Корзина пока пустая</div>`;
+  list.innerHTML=
+  `<div style="text-align:center;padding:40px;color:#777">
+   🛒 Корзина пустая
+  </div>`;
 
-        document.getElementById("cartTotal").textContent = "0 ₽";
+  document.getElementById("cartTotal")
+  .textContent="0 ₽";
 
-        return;
+  return;
 
-    }
+ }
 
-    container.innerHTML = cart.map(item => `
 
-        <div class="cart-item">
+ list.innerHTML=
+ cart.map(item=>`
 
-            <div class="cart-icon">
-                ${item.icon}
-            </div>
+ <div class="cart-item">
 
-            <div class="cart-item-info">
+  <div class="cart-thumb">
+   🔊
+  </div>
 
-                <b>${item.name}</b>
+  <div class="cart-info">
 
-                <small>
-                    ${formatPrice(item.price)}
-                </small>
+   <b>${item.name}</b>
 
-            </div>
+   <small>
+    ${money(item.price)}
+   </small>
 
-            <div class="qty">
+  </div>
 
-                <button onclick="changeQty(${item.id},-1)">
-                    −
-                </button>
+  <div class="qty">
 
-                <span>${item.quantity}</span>
+   <button
+    onclick="changeQty(${item.id},-1)">
+    −
+   </button>
 
-                <button onclick="changeQty(${item.id},1)">
-                    +
-                </button>
+   <span>${item.qty}</span>
 
-            </div>
+   <button
+    onclick="changeQty(${item.id},1)">
+    +
+   </button>
 
-        </div>
+  </div>
 
-    `).join("");
+ </div>
 
-    const total =
-        cart.reduce(
-            (sum,item) =>
-            sum + item.price * item.quantity,
-            0
-        );
+ `).join("");
 
-    document.getElementById("cartTotal")
-        .textContent = formatPrice(total);
 
-}
+ const total=
+ cart.reduce(
+  (sum,p)=>sum+p.price*p.qty,
+  0
+ );
 
-function changeQty(id,change){
-
-    const item =
-        cart.find(item => item.id === id);
-
-    if(!item) return;
-
-    item.quantity += change;
-
-    if(item.quantity <= 0){
-
-        cart =
-            cart.filter(item => item.id !== id);
-
-    }
-
-    updateCart();
-
-    renderCart();
+ document.getElementById("cartTotal")
+ .textContent=money(total);
 
 }
 
-function showForm(){
 
-    if(cart.length === 0){
+function changeQty(id,value){
 
-        alert("Сначала добавьте товар в корзину.");
+ const item=
+ cart.find(p=>p.id===id);
 
-        return;
+ if(!item)return;
 
-    }
+ item.qty+=value;
 
-    document
-        .getElementById("orderForm")
-        .classList.add("active");
+ if(item.qty<=0){
 
-}
+  cart=
+  cart.filter(p=>p.id!==id);
 
-function sendOrder(){
+ }
 
-    const name =
-        document.getElementById("name").value.trim();
-
-    const phone =
-        document.getElementById("phone").value.trim();
-
-    const city =
-        document.getElementById("city").value.trim();
-
-    if(!name || !phone || !city){
-
-        alert("Заполните все поля.");
-
-        return;
-
-    }
-
-    document
-        .getElementById("orderForm")
-        .classList.remove("active");
-
-    document
-        .getElementById("success")
-        .classList.add("active");
-
-    cart = [];
-
-    updateCart();
+ updateCart();
 
 }
 
-function filterProducts(category){
 
-    currentCategory = category;
+function toggleFavorite(id){
 
-    document.getElementById("catalog")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
+ if(favorites.includes(id)){
 
-    renderProducts();
+  favorites=
+  favorites.filter(x=>x!==id);
+
+ }else{
+
+  favorites.push(id);
+
+ }
+
+ document.getElementById("favCount")
+ .textContent=favorites.length;
+
+ renderProducts();
+
+ renderFavorites();
 
 }
+
+
+function renderFavorites(){
+
+ const list=
+ document.getElementById("favoritesList");
+
+ const items=
+ products.filter(
+  p=>favorites.includes(p.id)
+ );
+
+ if(!items.length){
+
+  list.innerHTML=
+  `<div style="grid-column:1/-1;text-align:center;padding:40px;color:#777">
+   ♡ Вы ещё ничего не добавили
+  </div>`;
+
+  return;
+
+ }
+
+ list.innerHTML=
+ items.map(productCard).join("");
+
+}
+
+
+function openCart(){
+
+ renderCart();
+
+ openModal("cartModal");
+
+}
+
+
+function openModal(id){
+
+ if(id==="favoritesModal"){
+  renderFavorites();
+ }
+
+ document
+ .getElementById(id)
+ .classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+ document
+ .getElementById(id)
+ .classList.remove("show");
+
+}
+
+
+function closeByOverlay(event,id){
+
+ if(event.target===event.currentTarget){
+
+  closeModal(id);
+
+ }
+
+}
+
+
+function createOrder(){
+
+ if(!cart.length){
+
+  alert("Корзина пустая");
+
+  return;
+
+ }
+
+ const name=
+ document.getElementById("orderName")
+ .value.trim();
+
+ const phone=
+ document.getElementById("orderPhone")
+ .value.trim();
+
+ const city=
+ document.getElementById("orderCity")
+ .value.trim();
+
+
+ if(!name||!phone||!city){
+
+  alert("Заполните имя, телефон и город.");
+
+  return;
+
+ }
+
+
+ /*
+  Сейчас заказ показывается локально.
+
+  Следующим этапом подключим Supabase
+  и Telegram, чтобы заказ реально
+  сохранялся в базе и приходил владельцу.
+ */
+
+
+ document
+ .getElementById("checkoutArea")
+ .style.display="none";
+
+ document
+ .getElementById("orderSuccess")
+ .classList.add("show");
+
+ cart=[];
+
+ updateCart();
+
+}
+
 
 function scrollToCatalog(){
 
-    document.getElementById("catalog")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
+ document
+ .getElementById("catalogSection")
+ .scrollIntoView({
+  behavior:"smooth"
+ });
 
 }
 
+
+function scrollToCar(){
+
+ document
+ .getElementById("carSection")
+ .scrollIntoView({
+  behavior:"smooth"
+ });
+
+}
+
+
+function findForCar(){
+
+ const brand=
+ document.getElementById("carBrand")
+ .value;
+
+ const model=
+ document.getElementById("carModel")
+ .value;
+
+ if(!brand){
+
+  alert("Выберите марку автомобиля.");
+
+  return;
+
+ }
+
+ category="Все";
+
+ renderProducts();
+
+ scrollToCatalog();
+
+ if(model){
+
+  alert(
+   "Подбор для "+brand+" "+model+
+   " будет автоматически фильтровать совместимые товары после подключения базы."
+  );
+
+ }
+
+}
+
+
+document
+.getElementById("carBrand")
+.addEventListener("change",function(){
+
+ const modelSelect=
+ document.getElementById("carModel");
+
+ modelSelect.innerHTML=
+ `<option value="">Выберите модель</option>`;
+
+ (models[this.value]||[])
+ .forEach(model=>{
+
+  const option=
+  document.createElement("option");
+
+  option.value=model;
+  option.textContent=model;
+
+  modelSelect.appendChild(option);
+
+ });
+
+});
+
+
 renderProducts();
+
+updateCart();
 
 </script>
 
